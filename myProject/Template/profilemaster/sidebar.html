@@ -1,0 +1,203 @@
+{% load static %}
+<div class="sidebar" data-background-color="dark">
+  <div class="sidebar-logo">
+    <!-- Logo Header -->
+    <div class="logo-header" data-background-color="dark">
+      <a href="{% url 'dashboard' %}" class="logo">
+        <img src="{% static 'profileassets/img/kaiadmin/logo_light.svg' %}" alt="navbar brand" class="navbar-brand"
+          height="50" />
+      </a>
+      <div class="nav-toggle">
+        <button class="btn btn-toggle toggle-sidebar">
+          <i class="gg-menu-right"></i>
+        </button>
+        <button class="btn btn-toggle sidenav-toggler">
+          <i class="gg-menu-left"></i>
+        </button>
+      </div>
+      <button class="topbar-toggler more">
+        <i class="gg-more-vertical-alt"></i>
+      </button>
+    </div>
+    <!-- End Logo Header -->
+  </div>
+  <div class="sidebar-wrapper scrollbar scrollbar-inner">
+    <div class="sidebar-content">
+      <ul class="nav nav-secondary">
+        <li class="nav-item">
+          <a href="{% url 'homepage' %}">
+            <i class="fas fa-home"></i>
+            <p>Home Page</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'dashboard' %}">
+            <i class="fas fa-th-large"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        {% if user.UserType == 'Authority' %}
+
+        <li class="nav-item">
+          <a href="{% url 'studentList' %}">
+            <i class="fas fa-user-graduate"></i>
+            <p>Students</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'teacherlist' %}">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <p>Teachers</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'stafflist' %}">
+            <i class="fas fa-user-tie"></i>
+            <p>Staffs</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'batchlist' %}">
+            <i class="fas fa-layer-group"></i>
+            <p>Batches</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'enrollcourselist' %}">
+            <i class="fas fa-id-card"></i>
+            <p>Enroll Course</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'categorylist' %}">
+            <i class="fas fa-clipboard-list"></i>
+            <p>Course Category</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'courselist' %}">
+            <i class="fas fa-book"></i>
+            <p>Courses</p>
+          </a>
+        </li>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'teacherattendenceList' %}">
+            <i class="fas fa-table"></i>
+            <p> Teacher Attendence</p>
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a>
+            <p>Payment Info</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="" class="collapsed" aria-expanded="false">
+            <i class="fas fa-wallet"></i>
+            <p>Student Payment</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="" class="collapsed" aria-expanded="false">
+            <i class="fas fa-credit-card"></i>
+            <p>Teacher & Staff Payment</p>
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a>
+            <p>Website Info</p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="{% url 'reviewlist' %}">
+            <i class="fa fa-comment"></i>
+            <p>Review</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'contactlist' %}">
+            <i class="fas fa-address-book"></i>
+            <p>Contact Info</p>
+          </a>
+        </li>
+
+        {% elif user.UserType == 'Teacher' %}
+
+        <li class="nav-item">
+          <a href="{% url 'teacherpersonalinfo' %}">
+            <i class="fas fa-address-book"></i>
+            <p>Personal Information</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'teacherbatchinfo' %}">
+            <i class="fas fa-layer-group"></i>
+            <p>Batches</p>
+          </a>
+        </li>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'teachersalaryinfo' %}">
+            <i class="fas fa-address-book"></i>
+            <p>Salary</p>
+          </a>
+        </li>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'studentAttendance' %}">
+            <i class="fas fa-table"></i>
+            <p> Student Attendence</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'teacherattendence' %}">
+            <i class="fas fa-table"></i>
+            <p> Attendence</p>
+          </a>
+        </li>
+
+        {% elif user.UserType == 'Student' %}
+
+        <li class="nav-item">
+          <a href="{% url 'studentInfo' %}">
+            <i class="fas fa-address-book"></i>
+            <p>Personal Information</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'studentbatches' %}">
+            <i class="fas fa-layer-group"></i>
+            <p>All Batches</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'studentongoingbatch' %}">
+            <i class="fas fa-clock"></i>
+            <p>On-Going Batch</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'studentPayment' %}">
+            <i class="fas fa-wallet"></i>
+            <p>Payment</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'studentAttendancelist' %}">
+            <i class="fas fa-table"></i>
+            <p> Attendence</p>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+
+
+    </div>
+  </div>
+</div>

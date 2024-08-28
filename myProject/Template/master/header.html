@@ -1,0 +1,38 @@
+{% load static %}
+<header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+      <a href="" class="logo d-flex align-items-center me-auto">
+        
+          <img src="{% static 'profileassets/img/kaiadmin/newlogo.png' %}" alt="navbar brand" class="navbar-brand"
+            height="20" />
+        
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{% url 'homepage' %}" {% if path == '/' %} class="active" {% endif %}>Home<br></a></li>
+          <!-- <li><a href="" {% if path == '/about/' %} class="active" {% endif %}>About</a></li> -->
+          <li><a href="{% url 'courses' %}" {% if path == '/courses/' %} class="active" {% endif %}>Courses</a></li>
+          <li><a href="{% url 'batches' %}" {% if path == '/batches/' %} class="active" {% endif %}> Batches</a></li>
+          <li><a href="{% url 'teachers' %}" {% if path == '/teachers/' %} class="active" {% endif %}>Trainers</a></li>
+          <!-- <li><a href="">Events</a></li>
+          <li><a href="">Gallery</a></li> -->
+          <li><a href="{% url 'contactpage' %}" {% if path == '/contactpage/' %} class="active" {% endif %}>Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+  
+      {% if not user.is_authenticated %}
+      <a class="btn-getstarted" href="{% url 'loginpage' %}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+
+      {% else %}
+      <a class="btn-getstarted" href="{% url 'dashboard' %}"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
+      <a class="btn-getstarted" href="{% url 'logoutPage' %}"><i class="bi bi-box-arrow-left"></i> Logout</a>
+
+        
+      {% endif %}
+        
+
+    </div>
+  </header>

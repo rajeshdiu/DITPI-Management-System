@@ -1,0 +1,129 @@
+{% load static %}
+<div class="main-header">
+  <div class="main-header-logo">
+    <!-- Logo Header -->
+    <div class="logo-header" data-background-color="dark">
+      <a href="index.html" class="logo">
+        <img src="{% static 'profileassets/img/kaiadmin/logo_light.svg' %}" alt="navbar brand" class="navbar-brand"
+          height="20" />
+      </a>
+      <div class="nav-toggle">
+        <button class="btn btn-toggle toggle-sidebar">
+          <i class="gg-menu-right"></i>
+        </button>
+        <button class="btn btn-toggle sidenav-toggler">
+          <i class="gg-menu-left"></i>
+        </button>
+      </div>
+      <button class="topbar-toggler more">
+        <i class="gg-more-vertical-alt"></i>
+      </button>
+    </div>
+    <!-- End Logo Header -->
+  </div>
+  <!-- Navbar Header -->
+  <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
+    <div class="container-fluid">
+      <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button type="submit" class="btn btn-search pe-1">
+              <i class="fa fa-search search-icon"></i>
+            </button>
+          </div>
+          <input type="text" placeholder="Search ..." class="form-control" />
+        </div>
+      </nav>
+
+      <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+        <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"
+            aria-haspopup="true">
+            <i class="fa fa-search"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-search animated fadeIn">
+            <form class="navbar-left navbar-form nav-search">
+              <div class="input-group">
+                <input type="text" placeholder="Search ..." class="form-control" />
+              </div>
+            </form>
+          </ul>
+        </li>
+
+
+        <li class="nav-item topbar-user dropdown hidden-caret">
+          <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+            {% if user.UserType == 'Authority' %}
+            <div class="avatar-sm">
+              <img src="{% static 'profileassets/img/kaiadmin/authoritylogo.png' %}" alt="..." class="avatar-img rounded-circle" />
+            </div>
+            <span class="profile-username">
+              <span class="fw-bold">Code Master</span>
+            </span>
+
+            {% elif user.UserType == 'Student' %}
+            <div class="avatar-sm">
+              <img src="{{user.studentinfo.StudentPhoto.url}}" alt="..." class="avatar-img rounded-circle" />
+            </div>
+            <span class="profile-username">
+              <span class="op-7">Hi,</span>
+              <span class="fw-bold">{{user.studentinfo.StudentName}}</span>
+            </span>
+
+            {% elif user.UserType == 'Teacher' %}
+            <div class="avatar-sm">
+              <img src="{{user.teacherinfo.TeacherPhoto.url}}" alt="..." class="avatar-img rounded-circle" />
+            </div>
+            <span class="profile-username">
+              <span class="op-7">Hi,</span>
+              <span class="fw-bold">{{user.teacherinfo.TeacherName}}</span>
+            </span>
+            {% endif %}
+          </a>
+          <ul class="dropdown-menu dropdown-user animated fadeIn">
+            <div class="dropdown-user-scroll scrollbar-outer">
+              <li>
+                <div class="user-box">
+                  {% if user.UserType == 'Authority' %}
+                  <div class="avatar-lg">
+                    <img src="{% static 'profileassets/img/kaiadmin/authoritylogo.png' %}" alt="image profile" class="avatar-img rounded" />
+                  </div>
+                  <div class="u-text">
+                    <h4>Code Master</h4>
+                    <p class="text-muted">Academy</p>
+                  </div>
+                  {% elif user.UserType == 'Student' %}
+                  <div class="avatar-lg">
+                    <img src="{{user.studentinfo.StudentPhoto.url}}" alt="image profile" class="avatar-img rounded" />
+                  </div>
+                  <div class="u-text">
+                    <h4>{{user.studentinfo.StudentName}}</h4>
+                    <a href="" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                  </div>
+
+                  {% elif user.UserType == 'Teacher' %}
+                  <div class="avatar-lg">
+                    <img src="{{user.teacherinfo.TeacherPhoto.url}}" alt="image profile" class="avatar-img rounded" />
+                  </div>
+                  <div class="u-text">
+                    <h4>{{user.teacherinfo.TeacherName}}</h4>
+                    <p class="text-muted">{{user.teacherinfo.Designation}}</p>
+                    <a href="{% url 'teacherpersonalinfo' %}" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                  </div>
+
+                  {% endif %}
+                </div>
+              </li>
+              <li>
+
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logoutPage' %}">Logout</a>
+              </li>
+            </div>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+</div>

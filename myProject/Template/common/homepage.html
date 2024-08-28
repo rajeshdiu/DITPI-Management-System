@@ -1,0 +1,261 @@
+{% extends 'master/master.html' %}
+
+{% block content %}
+{% load static %}
+<!-- Hero Section -->
+<section id="hero" class="hero section">
+
+  <img src="{% static 'assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in">
+
+  <div class="container">
+    <h2 data-aos="fade-up" data-aos-delay="100">Be Enlightened<br>to be Enshrined</h2>
+    <h3 data-aos="fade-up" data-aos-delay="200">This Project developed by the team <strong>"Bug Fixers"</strong></h3>
+    <h3 data-aos="fade-up" data-aos-delay="200"><strong>Team Members:</strong> Jessica, Tarek Mahmud, Fuad, Shakil</h3>
+    <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+      <a href="{% url 'batches' %}" class="btn-get-started">Get Started</a>
+    </div>
+  </div>
+
+</section><!-- /Hero Section -->
+
+
+<!-- Counts Section -->
+<section id="counts" class="section counts">
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+    <div class="row gy-4">
+
+      <div class="col-lg-3 col-md-6">
+        <div class="stats-item text-center w-100 h-100">
+          <span data-purecounter-start="0" data-purecounter-end="{{enrolledstudent}}" data-purecounter-duration="1"
+            class="purecounter"></span>
+          <p>Course Enrolled</p>
+        </div>
+      </div><!-- End Stats Item -->
+
+      <div class="col-lg-3 col-md-6">
+        <div class="stats-item text-center w-100 h-100">
+          <span data-purecounter-start="0" data-purecounter-end="{{coursecount}}" data-purecounter-duration="1"
+            class="purecounter"></span>
+          <p>Courses</p>
+        </div>
+      </div><!-- End Stats Item -->
+
+      <div class="col-lg-3 col-md-6">
+        <div class="stats-item text-center w-100 h-100">
+          <span data-purecounter-start="0" data-purecounter-end="{{batchcount}}" data-purecounter-duration="1"
+            class="purecounter"></span>
+          <p>Batches</p>
+        </div>
+      </div><!-- End Stats Item -->
+
+      <div class="col-lg-3 col-md-6">
+        <div class="stats-item text-center w-100 h-100">
+          <span data-purecounter-start="0" data-purecounter-end="{{teachercount}}" data-purecounter-duration="1"
+            class="purecounter"></span>
+          <p>Trainers</p>
+        </div>
+      </div><!-- End Stats Item -->
+
+    </div>
+
+  </div>
+
+</section><!-- /Counts Section -->
+
+<section id="batchfeatures" class="batchfeatures section courses">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <!-- <h2>Batch</h2> -->
+    <p>All Batches</p>
+    <h2></h2>
+
+  </div><!-- End Section Title -->
+  <div class="container items mb-2">
+    <div class="nav-item" data-aos="fade-up" data-aos-delay="100">
+      <a href="{% url 'batches' %}">
+        <div class="icon-text">
+          <i class="bi bi-view-list"></i>
+          <h3>All</h3>
+        </div>
+      </a>
+    </div>
+    <div class="nav-item" data-aos="fade-up" data-aos-delay="100">
+      <a href="{% url 'upcommingbatch' %}">
+        <div class="icon-text">
+          <i class="bi bi-rocket-takeoff"></i>
+          <h3>Upcoming</h3>
+        </div>
+      </a>
+    </div>
+    <div class="nav-item" data-aos="fade-up" data-aos-delay="150">
+      <a href="{% url 'ongoingbatch' %}">
+        <div class="icon-text">
+          <i class="bi bi-hourglass-split"></i>
+          <h3>Ongoing</h3>
+        </div>
+      </a>
+    </div>
+    <div class="nav-item" data-aos="fade-up" data-aos-delay="200">
+      <a href="{% url 'completedbatch' %}">
+        <div class="icon-text">
+          <i class="bi bi-check-circle-fill"></i>
+          <h3>Completed</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Popular Courses Section -->
+  <div class="container">
+
+    {% include 'common/batchsection.html' %}
+
+
+  </div>
+
+</section><!-- /Features Section -->
+
+
+
+
+<!-- Features Section -->
+<section id="features" class="features section mt-5">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Category</h2>
+    <p>Course Categories</p>
+  </div><!-- End Section Title -->
+  <div class="container">
+    <div class="row gy-4">
+      {% for i in categorydata %}
+      <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="features-item">
+          <i class="bi bi-intersect" style="color: #31ce36;"></i>
+          <h3><a href="{% url 'categorydetails' i.id %}">{{i.CategoryName}}</a></h3>
+        </div>
+      </div><!-- End Feature Item -->
+      {% endfor %}
+    </div>
+  </div>
+</section><!-- /Features Section -->
+
+<!-- Popular Courses Section -->
+<section id="courses" class="courses section">
+
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Courses</h2>
+    <p>Popular Courses</p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+
+    {% include 'common/popularcourse.html' %}
+  </div>
+
+</section><!-- /Courses Section -->
+
+
+<!-- All Courses Section -->
+<section id="courses" class="courses section">
+
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Courses</h2>
+    <p>All Courses</p>
+  </div><!-- End Section Title -->
+
+  <div class="container">
+
+    {% include 'common/coursesection.html' %}
+
+  </div>
+
+</section><!-- /Courses Section -->
+
+
+<!-- Trainers Index Section -->
+<section id="trainers-index" class="section trainers-index">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <h2>Trainers</h2>
+    <p>All Trainers</p>
+  </div><!-- End Section Title -->
+  <div class="container">
+    <div class="row">
+      {% include 'common/teachersection.html' %}
+    </div>
+  </div>
+</section><!-- /Trainers Index Section -->
+
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="testimonials section">
+
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+      <h2>Feedback</h2>
+      <p>What are the students saying</p>
+  </div><!-- End Section Title -->
+
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 1,
+                  "spaceBetween": 40
+                },
+                "1200": {
+                  "slidesPerView": 2,
+                  "spaceBetween": 20
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+              
+              {% for i in getcourseReview %}
+              <div class="swiper-slide">
+                  <div class="testimonial-wrap">
+                      <div class="testimonial-item">
+                          <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                          <h3>{{i.Imsuser.StudentName}}</h3>
+                          <p>{{i.CourseName}}</p>
+                          <div class="stars">
+                              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                  class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                  class="bi bi-star-fill"></i>
+                          </div>
+                          <p>
+                              <i class="bi bi-quote quote-icon-left"></i>
+                              <span>{{i.Review}}</span>
+                              <i class="bi bi-quote quote-icon-right"></i>
+                          </p>
+                      </div>
+                  </div>
+              </div><!-- End testimonial item -->
+              {% endfor %}
+          </div>
+          <div class="swiper-pagination"></div>
+      </div>
+  </div>
+</section><!-- /Testimonials Section -->
+
+
+{% endblock content %}

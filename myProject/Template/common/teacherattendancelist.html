@@ -1,0 +1,63 @@
+{% extends "profilemaster/master.html" %}
+
+
+{% block content %}
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Attendance List</h4>
+        {% include 'common/messages.html' %}
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="basic-datatables" class="display table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>SL No</th>
+                <th>Teacher ID</th>
+                <th>Teacher Name</th>
+                <th>Attendance Time</th>
+                <th>Attendance</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for i in teacherattendancedata %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{i.Teacher.EmployID}}</td>
+                  <td>{{i.Teacher.TeacherName}}</td>
+                  <td>{{i.date_time}}</td>
+                  <td>
+                    {% if i.Attendance == 'Absent'  %}
+                            <span class="badge badge-danger">{{i.Attendance}}</span>
+                    {% elif i.Attendance == 'Present' %}
+                            <span class="badge badge-success">{{i.Attendance}}</span>
+                    {% else %}
+                            <span class="badge badge-warning">{{i.Attendance}}</span>
+                        {% endif %}
+                  </td>  
+                  <td>
+                    <div class="form-button-action">
+                        <a href="{% url 'accpetattendance' i.id %}" class="btn btn-link btn-primary btn-md">
+                            <i class="fas fa-check"></i>
+                        </a>
+                        <a href="{% url 'rejectattendance' i.id %}" class="btn btn-link btn-danger btn-md">
+                            <i class="fas fa-times"></i>
+                        </a>
+                        
+                      </div>
+                  </td>         
+
+                </tr>
+              {% endfor %}
+                
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+{% endblock content %}

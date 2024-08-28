@@ -1,0 +1,70 @@
+{% extends "profilemaster/master.html" %}
+
+
+{% block content %}
+<style>
+    label {
+        margin-bottom: 5px;
+        color: #666;
+        text-align: left;
+        font-weight: bold;
+    }
+    
+    input,select,textarea {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        
+        width: 100%;
+    }
+    
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+</style>
+
+<div class="col-sm-12 col-md-12">
+    <div class="card card-stats card-round">
+        <div class="card-body">
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                <div>
+                    <h3 class="fw-bold mb-3">Add Course Information</h3>
+                </div>
+                <div class="ms-md-auto py-2 py-md-0">
+                    <a href="{% url 'courselist' %}" class="btn btn-primary btn-round"><i class="fas fa-table"></i> Course List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="form-title"><span>Course Information</span></h5>
+                        </div>
+                        {{categoryform}}
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+    

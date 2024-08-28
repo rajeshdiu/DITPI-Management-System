@@ -1,0 +1,72 @@
+{% extends "profilemaster/master.html" %}
+
+
+{% block content %}
+<div class="col-sm-12 col-md-12">
+    <div class="card card-stats card-round">
+        <div class="card-body">
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                <div>
+                    <h3 class="fw-bold mb-3">Today's Attendance Status</h3>
+                    <h5><strong>Today's date:</strong> {{ current_date }}</h5>
+                    <h5>Status: 
+                        {% if getattendance.Attendance == 'Absent'  %}
+                            <span class="badge badge-danger">{{getattendance.Attendance}}</span>
+                        {% elif getattendance.Attendance == 'Present' %}
+                            <span class="badge badge-success">{{getattendance.Attendance}}</span>
+                        {% else %}
+                            <span class="badge badge-warning">{{getattendance.Attendance}}</span>
+                        {% endif %}
+                    </h5>
+                </div>
+            </div>
+            {% if getattendance.Attendance != 'Pending' and getattendance.Attendance != 'Present' and getattendance.Attendance != 'Absent'   %}
+            <a href="{% url 'submitattendance' %}" class="btn btn-primary">Submit Your Attendance</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Attendance List</h4>
+        {% include 'common/messages.html' %}
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="basic-datatables" class="display table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>SL No</th>
+                <th>Attendance Time</th>
+                <th>Attendance</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              {% for i in allattendance %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{i.date_time}}</td>
+                  <td>
+                    {% if i.Attendance == 'Absent'  %}
+                            <span class="badge badge-danger">{{i.Attendance}}</span>
+                    {% elif i.Attendance == 'Present' %}
+                            <span class="badge badge-success">{{i.Attendance}}</span>
+                    {% else %}
+                            <span class="badge badge-warning">{{i.Attendance}}</span>
+                        {% endif %}
+                  </td>             
+
+                </tr>
+              {% endfor %}
+                
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+{% endblock content %}

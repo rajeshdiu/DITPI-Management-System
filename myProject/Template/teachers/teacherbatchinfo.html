@@ -1,0 +1,109 @@
+{% extends 'profilemaster/master.html' %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-6 col-md-6">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                            <i class="fas fa-book"></i>
+                        </div>
+                    </div>
+                    <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                            <p class="card-category">Assigned Batch</p>
+                            <h4 class="card-title">{{teacherbatchdata|length}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6">
+        <div class="card card-stats card-round">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-icon">
+                        <div class="icon-big text-center icon-success bubble-shadow-small">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="col col-stats ms-3 ms-sm-0">
+                        <div class="numbers">
+                            <p class="card-category">Total Students</p>
+                            <h4 class="card-title">{{totalstudent}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Batch List</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="basic-datatables" class="display table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>SL No</th>
+                <th>Batch No</th>
+                <th>Course Name</th>
+                <th>Schedule</th>
+                <th>Start Date</th>
+                <th>Total Student</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tfoot>
+              <tr>
+                <th>SL No</th>
+                <th>Batch No</th>
+                <th>Course Name</th>
+                <th>Schedule</th>
+                <th>Start Date</th>
+                <th>Total Student</th>
+                <th>Action</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              
+              {% for i in combined_data %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{i.batchdata.BatchNo}}</td>
+                  <td>{{i.batchdata.CourseName}}</td>
+                  <td>{{i.batchdata.Batchschedule}}</td>
+                  <td>{{i.batchdata.BatchStartDate}}</td>
+                  <td>{{i.enrolledstudent}}/{{i.batchdata.TotalStudent}}</td>
+                  <td>
+                    <div class="form-button-action">
+                      <a href="{% url 'viewbatch' i.batchdata.BatchNo %}" class="btn btn-link btn-primary btn-md">
+                        <i class="fa fa-eye"></i>
+                      </a>                      
+                      
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+                
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

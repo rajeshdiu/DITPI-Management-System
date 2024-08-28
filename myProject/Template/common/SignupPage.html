@@ -1,0 +1,77 @@
+{% extends 'master/master.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'assets/loginfile/css/style.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                <div class="login-wrap">
+                    <form action="{% url 'signupPage' %}" class="signin-form d-md-flex" method="POST">
+                        {% csrf_token %}
+                        <div class="half-left p-4 py-md-5">
+                            <div class="w-100">
+                                <h2 class="form-title mb-4"><strong>Login Account</strong></h2>
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <label class="label" for="name">Username</label>
+                                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <label class="label" for="name">E-mail</label>
+                                <input type="text" class="form-control" name="email" placeholder="Username" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="label" for="password">Password</label>
+                                <input id="password-field" type="password" name="password" class="form-control"
+                                    placeholder="Password" required>
+                                <span toggle="#password-field"
+                                    class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="label" for="password">Confirm Password</label>
+                                <input id="password-field" type="password" name="confirmpassword" class="form-control"
+                                    placeholder="Password" required>
+                                <span toggle="#password-field"
+                                    class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="label" for="password">UserType</label>
+                                <input id="password-field" type="text" name="UserType" class="form-control"
+                                    placeholder="Password" required>
+                                <span toggle="#password-field"
+                                    class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="form-control btn btn-secondary rounded submit px-3">Create Account</button>
+                                <br><br>
+                                <a href=" {% url 'loginpage' %} " class="w-100 text-center" style="color:rgb(0, 0, 0); ">&mdash; have any
+                                    account? &mdash;</a>
+                            </div>
+                        </div>
+                        <div class="half-right p-4 py-md-5 bg-primary">
+
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!--User Create info-->
+<script src="{% static 'assets/loginfile/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/loginfile/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/loginfile/js/main.js' %}"></script>
+{% endblock content %}

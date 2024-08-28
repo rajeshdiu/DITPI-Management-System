@@ -1,0 +1,65 @@
+{% extends 'master/master.html' %}
+
+{% block content %}
+{% load static %}
+{% include 'master/pagetitle.html' %}
+
+<section id="batchfeatures" class="batchfeatures section courses">
+  <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+    <!-- <h2>Batch</h2> -->
+    <p>{{headtitle}}</p>
+    <h2></h2>
+    
+  </div><!-- End Section Title -->
+  <div class="container items mb-2">
+    <div class="nav-item {% if path == '/batches/' %}active{% endif %}" data-aos="fade-up" data-aos-delay="100">
+      <a href="{% url 'batches' %}">
+        <div class="icon-text">
+          <i class="bi bi-view-list"></i>
+          <h3>All</h3>
+        </div>
+      </a>
+    </div>
+    <div class="nav-item {% if path == '/upcommingbatch/' %}active{% endif %}" data-aos="fade-up" data-aos-delay="100">
+      <a href="{% url 'upcommingbatch' %}">
+        <div class="icon-text">
+          <i class="bi bi-rocket-takeoff"></i>
+          <h3>Upcoming</h3>
+        </div>
+      </a>
+    </div>
+    <div class="nav-item {% if path == '/ongoingbatch/' %}active{% endif %}" data-aos="fade-up" data-aos-delay="150">
+      <a href="{% url 'ongoingbatch' %}">
+        <div class="icon-text">
+          <i class="bi bi-hourglass-split"></i>
+          <h3>Ongoing</h3>
+        </div>
+      </a>
+    </div>
+    <div class="nav-item {% if path == '/completedbatch/' %}active{% endif %}" data-aos="fade-up" data-aos-delay="200">
+      <a href="{% url 'completedbatch' %}">
+        <div class="icon-text">
+          <i class="bi bi-check-circle-fill"></i>
+          <h3>Completed</h3>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+
+  <!-- Popular Courses Section -->
+  <div class="container">
+
+  
+  {% block batchcontent %}
+    
+  {% endblock batchcontent %}
+    
+
+  </div>
+
+</section><!-- /Features Section -->
+  
+{% endblock content %}
+  

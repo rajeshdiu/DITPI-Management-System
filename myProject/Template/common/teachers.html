@@ -1,0 +1,22 @@
+{% extends 'master/master.html' %}
+
+{% block content %}
+{% load static %}
+{% include 'master/pagetitle.html' %}
+
+<!-- Trainers Index Section -->
+<section id="trainers-index" class="section trainers-index">
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Trainers</h2>
+      <p>All Trainers</p>
+    </div><!-- End Section Title -->
+    <div class="container">
+      <div class="row">
+        {% include 'common/teachersection.html' %}
+      </div>
+    </div>
+  </section><!-- /Trainers Index Section -->
+  
+{% endblock content %}
+  

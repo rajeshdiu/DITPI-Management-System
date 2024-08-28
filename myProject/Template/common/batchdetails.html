@@ -1,0 +1,264 @@
+{% extends 'master/master.html' %}
+{% block content %}
+{% load static %}
+{% include 'master/pagetitle.html' %}
+
+<section id="about-us" class="section about-us">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-lg-6 order-1 order-lg-2 position-relative" data-aos="fade-up" data-aos-delay="100">
+                <div class="image-container">
+                    <img src="{{batchdata.CourseName.CourseImage.url}}" class="img-fluid course-image" alt=""
+                        data-bs-toggle="modal" data-bs-target="#videoModal">
+                    <div class="play-icon" data-bs-toggle="modal" data-bs-target="#videoModal">
+                        <i class="bi bi-play-circle"></i>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card coursefee">
+                            <div class="card-body">
+                                <p class="card-title">Course Fee</p>
+                                <h5 class="card-text mb-3">BDT {{batchdata.CourseName.CourseFee}}</h5>
+                                <a href="{% url 'applybatch' batchdata.BatchNo %}"
+                                    class="btn btn-light btn-block text-danger">
+                                    <i class="bi bi-send-fill"></i> Apply For Batch
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <div class="card coursestudent">
+                            <div class="card-body">
+                                <p class="card-title">Enrolled Students</p>
+                                <h5 class="card-text mb-3"><i class="bi bi-people-fill"></i> {{studentcount}}</h5>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card coursestudent">
+                            <div class="card-body">
+                                <p class="card-title">Remaining Seats</p>
+                                <h5 class="card-text mb-3"><i class="bi bi-people-fill"></i> {{remainstudent}}</h5>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    {% for i in teacherinfo %}
+                    <div class="col-lg-6 col-md-6 teacher aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                        <div class="teacherimage d-flex justify-content-center align-items-center">
+                            <img src="{{ i.TeacherPhoto }}" class="img-fluid" alt="">
+                        </div>
+                        <div class="teacherinfo-info text-center mt-2">
+                            <h5><strong>{{ i.TeacherName }}</strong></h5>
+                        </div>
+                    </div>
+                    
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body position-relative">
+                            <button type="button" class="btn-close position-absolute top-0 end-0 m-3"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="ratio ratio-16x9">
+                                <iframe id="videoIframe" src="" title="Course Video" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--====Video Play JS Script=====-->
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var videoModal = document.getElementById('videoModal');
+                    var videoIframe = document.getElementById('videoIframe');
+                    var videoUrl = "{{ batchdata.CourseName.IntroVideo }}";
+
+                    // Replace the watch?v= part of the URL with embed/ if it's a YouTube link
+                    if (videoUrl.includes("watch?v=")) {
+                        videoUrl = videoUrl.replace("watch?v=", "embed/");
+                    }
+
+                    videoModal.addEventListener('show.bs.modal', function () {
+                        videoIframe.src = videoUrl;
+                    });
+
+                    videoModal.addEventListener('hidden.bs.modal', function () {
+                        videoIframe.src = "";
+                    });
+                });
+            </script>
+
+            <div class="col-lg-6 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                <p class="">{{batchdata.CourseName.Sologan}}</p>
+                <h3>{{batchdata.CourseName}}</h3>
+
+                <div class="row topsection-card">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Batch No</p>
+                                <h5 class="card-text">{{batchdata.BatchNo}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Batch Schedule</p>
+                                <h5 class="card-text2">{{batchdata.Batchschedule}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Status</p>
+                                <h5 class="card-text">{{batchdata.Status}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Lecture</p>
+                                <h5 class="card-text">{{batchdata.CourseName.Lecture}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Project</p>
+                                <h5 class="card-text">{{batchdata.CourseName.TotalProject}}+</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Duration</p>
+                                <h5 class="card-text">{{batchdata.CourseName.CourseDuration}} Months</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-title">Batch Start</p>
+                                <h5 class="card-text"><i class="bi bi-calendar2-event"></i> {{batchdata.BatchStartDate}}
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p>{{batchdata.CourseName.ShortSummary}}</p>
+
+
+                <div class="row mt-4 mb-5">
+                    <div class="col-lg-12 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Course Overview</h3>
+                        <p>{{batchdata.CourseName.CourseOverview}}</p>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Course Curriculum</h3>
+                        <div id="course-curriculum" class="row"></div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Learn Software</h3>
+                        <div id="software" class="row"></div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Course For</h3>
+                        <div id="coursefor" class="row"></div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-12 order-2 order-lg-1 content" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Job Positions</h3>
+                        <div id="jobpositions" class="row"></div>
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const data = {
+                            'course-curriculum': "{{batchdata.CourseName.CourseCurrriculum|escapejs}}",
+                            'software': "{{batchdata.CourseName.Software|escapejs}}",
+                            'coursefor': "{{batchdata.CourseName.CourseFor|escapejs}}",
+                            'jobpositions': "{{batchdata.CourseName.JobPositions|escapejs}}"
+                        };
+
+                        function renderData(containerId, dataString) {
+                            if (!dataString) {
+                                console.error(`Data for ${containerId} is empty or not defined.`);
+                                return;
+                            }
+
+                            const items = dataString.split(',');
+
+                            if (items.length === 0) {
+                                console.error(`No items found after splitting the data for ${containerId}.`);
+                                return;
+                            }
+
+                            const container = document.getElementById(containerId);
+
+                            const column1 = document.createElement('div');
+                            column1.className = 'col-md-6';
+
+                            const column2 = document.createElement('div');
+                            column2.className = 'col-md-6';
+
+                            items.forEach((item, index) => {
+                                const bulletItem = document.createElement('div');
+                                bulletItem.innerHTML = `<i class="bi bi-clipboard-check-fill"></i> ${item.trim()}`;
+
+                                if (index % 2 === 0) {
+                                    column1.appendChild(bulletItem);
+                                } else {
+                                    column2.appendChild(bulletItem);
+                                }
+                            });
+
+                            container.appendChild(column1);
+                            container.appendChild(column2);
+                        }
+
+                        // Render each dataset
+                        renderData('course-curriculum', data['course-curriculum']);
+                        renderData('software', data.software);
+                        renderData('coursefor', data.coursefor);
+                        renderData('jobpositions', data.jobpositions);
+                    });
+                </script>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock content %}

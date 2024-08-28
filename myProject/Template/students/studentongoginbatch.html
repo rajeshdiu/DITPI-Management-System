@@ -1,0 +1,65 @@
+{% extends 'profilemaster/master.html' %}
+
+
+{% block content %}
+<div class="col-sm-12 col-md-12">
+    <div class="card card-stats card-round">
+        <div class="card-body">
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                <div>
+                    <h3 class="fw-bold mb-3">On-Going Batch Information</h3>
+                </div>
+                
+            </div>
+        </div>
+    </div>  
+  </div>
+<div class="row justify-content-center align-items-center mb-5">
+    {% for i in batchdata %}
+    <div class="col-md-6">
+        <a href="{% url 'batchdetails' i.id %}">
+            <div class="card card-black bg-primary-gradient">
+                <div class="card-body curves-shadow">
+                    <h2 class="py-4 mb-0"><strong>Batch No:</strong> {{i.BatchNo}}</h2>
+                    <div class="row">
+                        <div class="col-8 pe-0">
+                            <h3 class="fw-bold mb-1">{{i.CourseName}}</h3>
+                            <div class="text-small text-uppercase fw-bold op-8">
+                                Batch Start: {{i.BatchStartDate}}
+                            </div>
+                        </div>
+                        <div class="col-4 ps-0 text-end">
+                            <h3 class="fw-bold mb-1">{{i.Status}} </h3>
+                            <div class="text-small text-uppercase fw-bold op-8">
+                                Status
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row user-stats text-center">
+                        <div class="col">
+                            <h3 class="number fw-bold p-0 m-0">{{i.CourseName.Lecture}}</h3>
+                            <div class="title">Lecture</div>
+                        </div>
+                        <div class="col">
+                            <h3 class="number fw-bold p-0 m-0">{{i.CourseName.CourseDuration}} Months</h3>
+                            <div class="title">Duration</div>
+                        </div>
+                        <div class="col">
+                            <h5 class="number fw-bold p-0 m-0">{{i.Batchschedule}}</h5>
+                            <div class="title">Weekly Class</div>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </a>
+    </div>
+
+
+    {% endfor %}
+</div>
+
+{% endblock content %}

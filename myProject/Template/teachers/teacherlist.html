@@ -1,0 +1,82 @@
+{% extends 'profilemaster/master.html' %}
+
+{% block content %}
+<div class="col-sm-12 col-md-12">
+    <div class="card card-stats card-round">
+        <div class="card-body">
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                <div>
+                    <h3 class="fw-bold mb-3">Teacher Information</h3>
+                </div>
+                <div class="ms-md-auto py-2 py-md-0">
+                    <a href="{% url 'addteacher' %}" class="btn btn-primary btn-round"><i class="fas fa-plus-circle"></i> Add Teacher</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Teacher List</h4>
+        {% include 'common/messages.html' %}
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="basic-datatables" class="display table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>SL No</th>
+                <th>Teacher Name</th>
+                <th>Teacher ID</th>
+                <th>Designation</th>
+                <th>Password</th>
+                <th>Join Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>SL No</th>
+                <th>Teacher Name</th>
+                <th>Teacher ID</th>
+                <th>Designation</th>
+                <th>Password</th>
+                <th>Join Date</th>
+                <th>Action</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              
+              {% for i in teacherdata %}
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.TeacherName}}</td>
+                <td>{{i.EmployID}}</td>
+                <td>{{i.Designation}}</td>
+                <td>{{i.Imsuser.personalinfo.Password}}</td>
+                <td>{{i.JoinDate}}</td>
+                  <td>
+                    <div class="form-button-action">
+                      <a href="{% url 'editteacher' i.id %}" class="btn btn-link btn-primary btn-md">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{% url 'deleteteacher' i.id %}" class="btn btn-link btn-danger btn-md">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                      
+                    </div>
+                  </td>                
+
+              </tr>
+                
+              {% endfor %}
+                
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock content %}

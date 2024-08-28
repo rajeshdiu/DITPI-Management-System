@@ -1,0 +1,161 @@
+{% extends 'profilemaster/master.html' %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-md-3">
+      <div class="card card-stats card-round">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-icon">
+              <div class="icon-big text-center icon-primary bubble-shadow-small">
+                <i class="fas fa-layer-group"></i>
+              </div>
+            </div>
+            <div class="col col-stats ms-3 ms-sm-0">
+              <div class="numbers">
+                <p class="card-category">Enrolled Course</p>
+                <h4 class="card-title">{{coursedata|length}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="card card-stats card-round">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-icon">
+              <div class="icon-big text-center icon-info bubble-shadow-small">
+                <i class="fas fa-credit-card"></i>
+              </div>
+            </div>
+            <div class="col col-stats ms-3 ms-sm-0">
+              <div class="numbers">
+                <p class="card-category">Course Fee</p>
+                <h4 class="card-title">৳ {{coursefee}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+      <div class="card card-stats card-round">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-icon">
+              <div class="icon-big text-center icon-success bubble-shadow-small">
+                <i class="fas fa-wallet"></i>
+              </div>
+            </div>
+            <div class="col col-stats ms-3 ms-sm-0">
+              <div class="numbers">
+                <p class="card-category">Payment</p>
+                <h4 class="card-title">৳ {{payment}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="card card-stats card-round">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-icon">
+                <div class="icon-big text-center icon-danger bubble-shadow-small">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+              </div>
+              <div class="col col-stats ms-3 ms-sm-0">
+                <div class="numbers">
+                  <p class="card-category">Due</p>
+                  <h4 class="card-title">৳ {{due}}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Payment List</h4>
+        {% include 'common/messages.html' %}
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="basic-datatables" class="display table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>SL No</th>
+                <th>Batch No</th>
+                <th>Course Name</th>
+                <th>Course Fee</th>
+                <th>Payment</th>
+                <th>Due</th>
+                <th>Admission Date</th>
+                {% if user.UserType == 'Authority' %}
+                <th>Action</th>
+                {% endif %}
+              </tr>
+            </thead>
+  
+            <tfoot>
+              <tr>
+                <th>SL No</th>
+                <th>Batch No</th>
+                <th>Course Name</th>
+                <th>Course Fee</th>
+                <th>Payment</th>
+                <th>Due</th>
+                <th>Admission Date</th>
+                {% if user.UserType == 'Authority' %}
+                <th>Action</th>
+                {% endif %}
+              </tr>
+            </tfoot>
+            <tbody>
+  
+              {% for i in coursedata %}
+  
+              <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.LearningBatch}}</td>
+                <td>{{i.LearningBatch.CourseName}}</td>
+                <td>{{i.CourseFee}}</td>
+                <td>{{i.Payment}}</td>
+                <td>{{i.Due}}</td>
+                <td>{{i.CourseName}}</td>
+                
+                {% if user.UserType == 'Authority' %}
+                <td>
+                  <div class="form-button-action">
+                      <a href="{% url 'editstudent' i.id %}" class="btn btn-link btn-primary btn-md">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="{% url 'deletestudent' i.id %}" class="btn btn-link btn-danger btn-md">
+                        <i class="fa fa-trash"></i>
+                      </a>
+                      
+                    </div>
+              </td>
+            </tr>
+                  
+                {% endif %}
+                  
+  
+              {% endfor %}
+  
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+    
